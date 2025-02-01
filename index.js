@@ -1,64 +1,93 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Ruta principal que muestra la documentación en HTML
+app.get('/', (req, res) => {
+  res.send(`
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comandos del Bot</title>
+    <title>Documentación para Comandos de Discord</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            background: #f8f8f8; 
-            padding: 20px; 
-        }
-        h1 { 
-            color: #0073e6; 
-        }
-        ul { 
-            list-style: none; 
-            padding: 0; 
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        li { 
-            background: white; 
-            margin: 10px; 
-            padding: 10px; 
-            border-radius: 5px; 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-        }
-        footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: gray;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+      }
+      h1, h2 {
+        color: #7289DA;
+      }
+      .command {
+        background: #fff;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      code {
+        background: #eee;
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
+      pre {
+        background: #eee;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #777;
+      }
     </style>
-</head>
-<body>
-    <h1>📜 Comandos del Bot</h1>
-    <p>Estos son los comandos disponibles para el bot:</p>
-    <ul id="commands-list"></ul>
+  </head>
+  <body>
+    <h1>Documentación para Comandos de Discord</h1>
+    <p>Bienvenido a la documentación de comandos de nuestro bot de Discord.</p>
+    
+    <div class="command">
+      <h2>!ayuda</h2>
+      <p>Muestra la lista de comandos disponibles y su descripción.</p>
+      <pre><code>!ayuda</code></pre>
+    </div>
+    
+    <div class="command">
+      <h2>!info</h2>
+      <p>Muestra información sobre el bot y el servidor.</p>
+      <pre><code>!info</code></pre>
+    </div>
+    
+    <div class="command">
+      <h2>!ban [usuario]</h2>
+      <p>Banea a un usuario del servidor. <strong>Requiere permisos de moderación.</strong></p>
+      <pre><code>!ban @usuario</code></pre>
+    </div>
+    
+    <div class="command">
+      <h2>!kick [usuario]</h2>
+      <p>Expulsa a un usuario del servidor. <strong>Requiere permisos de moderación.</strong></p>
+      <pre><code>!kick @usuario</code></pre>
+    </div>
+    
+    <div class="command">
+      <h2>!mute [usuario]</h2>
+      <p>Silencia a un usuario en el servidor.</p>
+      <pre><code>!mute @usuario</code></pre>
+    </div>
+    
     <footer>
-        <p>Bot creado por <strong>TuNombre</strong> | <a href="https://discord.com/oauth2/authorize?client_id=TU_CLIENT_ID&scope=bot&permissions=8" target="_blank">➕ Invitar al Bot</a></p>
+      <p>© 2025 Tu Bot de Discord</p>
     </footer>
+  </body>
+  </html>
+  `);
+});
 
-    <script>
-        // Lista de comandos del bot
-        const commands = [
-            { name: '/ping', description: 'Responde con Pong!' },
-            { name: '/say', description: 'Repite un mensaje' },
-            { name: '/avatar', description: 'Muestra tu avatar' },
-            { name: '/serverinfo', description: 'Muestra información del servidor' },
-            { name: '/random', description: 'Número aleatorio entre 1 y 100' }
-        ];
-
-        // Insertar comandos en la página
-        const commandsList = document.getElementById('commands-list');
-        commands.forEach(cmd => {
-            const li = document.createElement('li');
-            li.innerHTML = `<strong>${cmd.name}</strong>: ${cmd.description}`;
-            commandsList.appendChild(li);
-        });
-    </script>
-</body>
-</html>
+// Levanta el servidor en el puerto especificado
+app.listen(port, () => {
+  console.log(`Servidor ejecutándose en http://localhost:${port}`);
+});
