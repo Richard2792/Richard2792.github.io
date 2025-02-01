@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación de Comandos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Documentación de Comandos Slash</h1>
+    </header>
+    <main>
+        <ul id="command-list"></ul>
+    </main>
+    <script>
+        const commands = [
+            { name: 'ping', description: 'Responde con Pong!' },
+            { name: 'say', description: 'Repite un mensaje escrito' },
+            { name: 'avatar', description: 'Muestra tu avatar de Discord' },
+            { name: 'serverinfo', description: 'Muestra información del servidor' },
+            { name: 'random', description: 'Genera un número aleatorio entre 1 y 100' }
+        ];
+
+        const commandList = document.getElementById('command-list');
+        commands.forEach(command => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${command.name}</strong>: ${command.description}`;
+            commandList.appendChild(li);
+        });
+    </script>
+</body>
+</html>
